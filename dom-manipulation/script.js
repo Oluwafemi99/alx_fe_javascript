@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const quoteDisplay = document.querySelector('#quoteDisplay');
     const categoryContainer = document.querySelector('#categoryContainer');
     const formContainer = document.querySelector('#formContainer');
-    const button = document.querySelector('button');
+    const newQuote = document.getElementById('newQuote');
 
 
     // Display a quote when the page loads
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     createCategorySelector()
 
     
-    button.addEventListener('click', showRandomQuote)
+    newQuote.addEventListener('click', showRandomQuote)
 
 
     // Displays a random quote based on the selected category
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             category: category.trim()
         })
 
-        
+
         // Update category dropdown and show a quote
         createCategorySelector();
         showRandomQuote()
