@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
         populateCategories()
         filterQuotes()
-        notifyUser('Quotes synced from server. Local changes overwritten.')
+        notifyUser("Quotes synced with server!")
     }
 
 
