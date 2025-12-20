@@ -170,15 +170,32 @@ document.addEventListener('DOMContentLoaded', ()=>{
             saveQuotes()
             populateCategories();
             filterQuotes()
+            postQuoteToServer(quotes);
 
             // Clear input fields after adding
             quoteInput.value = '';
             categoryInput.value = '';
-        })
+        });
 
 
         // Append form elements to the page
         formContainer.append(quoteInput, categoryInput, addBtn)
+    }
+
+
+    // POST QUOTE TO SERVER
+
+    function postQuoteToServer(quote){
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(quote)
+        })
+        .then(res => res.json())
+        .then(() => notifyUser('Quote synced to server'))
+        .catch(() => notifyUser('Server sync failed'));
     }
 
 
