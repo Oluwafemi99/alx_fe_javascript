@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const formContainer = document.querySelector('#formContainer');
     const newQuote = document.getElementById('newQuote');
     const exportBtn = document.getElementById('exportBtn');
-    const importFile = document.getElementById('importFile')
+    const importFile = document.getElementById('importFile');
+    const syncStatus = document.getElementById('syncStatus');
+    const url = 'https://jsonplaceholder.typicode.com/posts';
 
 
     // Create the form for adding new quotes
@@ -218,4 +220,50 @@ document.addEventListener('DOMContentLoaded', ()=>{
         // Read uploaded file as text
         reader.readAsText(events.target.files[0]);
     }
+
+    async function fetchFromServer() {
+        try {
+            const serverUrl = await fetch(url);
+            const data = serverUrl.JSON();
+
+            // Convert server posts → quotes format
+            const serverQuotes = data.map(post => ({
+            text: post.title,
+            category: server
+            }))
+
+            resolveConflicts(serverQuotes);
+
+        }catch(error){
+            console.error('server fetch failed', error);
+        }
+
+    }
+
+    function resolveConflicts(serverQuotes){
+
+        const localQuotes = JSON.parse(localStorage.getItem('quotes')) || []
+
+        // Simple conflict strategy: server overwrites local
+
+        localStorage.setItem('quotes', JSON.stringify(serverQuotes));
+        quotes.length = 0;
+        quotes.push(...serverQuotes);
+
+        populateCategories()
+        filterQuotes()
+        notifyUser('Quotes synced from server. Local changes overwritten.')
+    }
+
+
+    function notifyUser(message) {
+        syncStatus.textContent = message;
+        setTimeout(() => {
+            syncStatus.textContent = '';
+        }, 4000);
+    }
+
+    setInterval(fetchFromServer, 30000);
+
+    
 })
