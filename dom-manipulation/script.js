@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         reader.readAsText(events.target.files[0]);
     }
 
-    async function fetchFromServer() {
+    async function fetchQuotesFromServer() {
         try {
             const serverUrl = await fetch(url);
             const data = serverUrl.JSON();
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }, 4000);
     }
 
-    setInterval(fetchFromServer, 30000);
+    setInterval(fetchQuotesFromServer, 30000);
 
-    
+
 })
