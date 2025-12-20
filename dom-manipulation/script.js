@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const newQuote = document.getElementById('newQuote');
     const exportBtn = document.getElementById('exportBtn');
     const importFile = document.getElementById('importFile');
-    const syncStatus = document.getElementById('syncStatus');
+    const syncQuotes = document.getElementById('syncStatus');
     const url = 'https://jsonplaceholder.typicode.com/posts';
 
 
@@ -274,9 +274,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 
     function notifyUser(message) {
-        syncStatus.textContent = message;
+        syncQuotes.textContent = message;
         setTimeout(() => {
-            syncStatus.textContent = '';
+            syncQuotes.textContent = '';
         }, 4000);
     }
 
